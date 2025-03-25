@@ -66,10 +66,12 @@ Potential Q&A:
 
 Q: Why run sudo apt update?
 A: It refreshes the package lists from the repositories to make sure you install the latest versions.
+```
 
 b. Install the Mosquitto MQTT Broker
+```bash
 sudo apt install mosquitto  # Install Mosquitto, a popular open-source MQTT broker.
-
+```
 Potential Q&A:
 
 Q: What is Mosquitto?
@@ -77,9 +79,9 @@ A: Mosquitto is an open-source MQTT broker that facilitates MQTT messaging for I
 
 c. Locate the Mosquitto Configuration File
 Open the configuration file using a text editor:
-
+```bash
 sudo nano /etc/mosquitto/mosquitto.conf
-
+```
 Potential Q&A:
 
 Q: Why edit mosquitto.conf?
@@ -87,53 +89,60 @@ A: To customize the broker’s behavior such as port settings and access permiss
 
 d. Edit the Mosquitto Configuration File
 Within the file, add or modify the following lines to enable connections on port 1883 and allow anonymous access:
-
+```bash
 listener 1883          # The broker will listen on port 1883 for incoming connections.
 allow_anonymous true   # Allow clients to connect without requiring a username and password.
-
+```
 Potential Q&A:
 
 Q: Is it safe to allow anonymous access?
 A: For testing or controlled environments it is acceptable; however, for production systems, you should secure your broker with authentication.
 
 e. Start the Mosquitto Broker Manually
-
+```bash
 sudo mosquitto -c /etc/mosquitto/mosquitto.conf  # Start the broker with the specified configuration file.
+```
 2. Enable Mosquitto Broker to Run on Boot (Optional)
 a. Start and Enable the Broker on Boot
-
+```bash
 sudo systemctl start mosquitto   # Start the Mosquitto service.
 sudo systemctl enable mosquitto  # Enable Mosquitto to run on boot.
+```
 Potential Q&A:
 
 Q: What does systemctl enable do?
 A: It configures the service to start automatically during system boot.
 
 b. Restart the Mosquitto Broker to Apply Configuration Changes
-
+```bash
 sudo systemctl restart mosquitto  # Restart the service to load new configuration settings.
+```
 c. Verify the Mosquitto Service Status
-
+```bash
 systemctl status mosquitto  # Check if Mosquitto is running and view its status.
+```
 d. Disable and Stop the Broker (if needed)
-
+```bash
 sudo systemctl disable mosquitto  # Prevent Mosquitto from starting on boot.
 sudo systemctl stop mosquitto     # Stop the running Mosquitto service.
+```
 3. Install and Configure the MQTT Client (Publisher and/or Subscriber)
 a. Activate Your Python Virtual Environment
-
+```bash
 source myenv/bin/activate  # Activate the virtual environment where your Python packages are installed.
+```
 Potential Q&A:
 
 Q: Why use a virtual environment?
 A: It isolates dependencies and package versions for your project from the system-wide Python installation.
 
 b. Install the Python Paho MQTT Library
-
+```bash
 pip install paho-mqtt  # Install the Paho MQTT library to enable MQTT functionalities in Python.
+```
 c. Create a Python Script for the MQTT Publisher (mqtt_publisher.py)
 Below is an example script with inline comments:
-
+```bash
 import paho.mqtt.client as mqtt  # Import the MQTT client library.
 import time  # Import time module to add delays between publishes.
 
@@ -148,6 +157,7 @@ while True:
     client.publish("test/topic", "Hello, MQTT!")
     # Pause for 5 seconds before sending the next message.
     time.sleep(5)
+```
 Potential Q&A:
 
 Q: What is the purpose of client.publish()?
@@ -155,7 +165,7 @@ A: It sends a message to the specified topic so that any subscribers to that top
 
 d. Create a Python Script for the MQTT Subscriber (mqtt_subscriber.py)
 Below is an example script with inline comments:
-
+```bash
 import paho.mqtt.client as mqtt  # Import the MQTT client library.
 
 # Callback function that is called when a message is received.
@@ -177,6 +187,7 @@ client.subscribe("test/topic")
 
 # Enter a loop that waits for messages and processes them as they arrive.
 client.loop_forever()
+```
 Potential Q&A:
 
 Q: How does the subscriber receive messages?
@@ -186,24 +197,27 @@ A: It connects to the broker, subscribes to a topic, and continuously listens fo
 Open Two Terminal Windows on the Raspberry Pi.
 
 In the First Terminal, Run the Subscriber Script:
-
+```bash
 python3 mqtt_subscriber.py
+```
 Potential Q&A:
 
 Q: What should you expect in the subscriber terminal?
 A: It should display incoming messages published to the topic "test/topic".
 
 In the Second Terminal, Run the Publisher Script:
-
+```bash
 python3 mqtt_publisher.py
+```
 Potential Q&A:
 
 Q: What will the publisher do?
 A: It will continuously publish the message "Hello, MQTT!" every 5 seconds.
 
 Remember to Activate the Virtual Environment Before Running the Scripts:
-
+```bash
 source myenv/bin/activate
+```
 Observe the Communication:
 The subscriber terminal should display the messages sent by the publisher.
 

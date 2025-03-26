@@ -53,7 +53,10 @@ def get_response(model: str, text_input: str) -> str:
 if __name__ == "__main__":
     MODEL = "gpt-4o"
     # MODEL = "o3-mini-2025-01-31"
-    TEXT_INPUT = "hello"
+    TEXT_INPUT = """ # Import MediaPipe's Python task wrappers for vision tasks (object detection, etc.)
+from mediapipe.tasks import python    # Base API for task configuration
+from mediapipe.tasks.python import vision  # Vision-specific modules for object detection
+    """
     
     result = get_response(MODEL, TEXT_INPUT)
     print(result)

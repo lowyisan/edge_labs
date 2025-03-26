@@ -1,6 +1,8 @@
-## 📄 Prompt for Lab Comments
+# 📄 Prompt for Lab Comments
 
 Here's my code below. Could you please add inline comments to explain each section and include additional explanations for key parts along with potential questions (and answers) that might come up during my lab test? Also, add a top-level explanation on what this code is within the code itself.
+
+# instructions for mr chat
 
 ## 🔧 Set Your API Key (Required)
 

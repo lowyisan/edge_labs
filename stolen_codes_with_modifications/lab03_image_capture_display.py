@@ -24,10 +24,19 @@ import numpy as np          # NumPy for numerical operations and masking
 #%% Define BGR color boundaries for segmentation
 # The boundaries are defined for detecting Red, Blue, and Green colors.
 # Note: Although comments mention "RGB", OpenCV uses BGR format by default.
+# A trick to determine these ranges for a new colour: think of each channel (B, G, R) as a slider.
+# For example, if you want to detect a color X that has high Blue and Green but low Red, set high ranges for Blue and Green,
+# and a lower range for Red.
 boundaries = [
     ([17, 15, 100], [50, 56, 200]),   # Red range (BGR values)
     ([86, 31, 4], [220, 88, 50]),      # Blue range (BGR values)
-    ([25, 90, 4], [62, 200, 50])       # Green range (BGR values)
+    ([25, 90, 4], [62, 200, 50]),      # Green range (BGR values)
+    ([0, 100, 100], [50, 255, 255]),   # Yellow range (BGR values)
+    ([0, 100, 200], [50, 200, 255]),   # Orange range (BGR values)
+    ([100, 0, 100], [160, 100, 160]),  # Purple range (BGR values)
+    ([200, 200, 0], [255, 255, 50]),   # Cyan range (BGR values)
+    ([200, 0, 200], [255, 100, 255]),  # Magenta range (BGR values)
+    ([20, 20, 140], [70, 70, 200])     # Brown range (BGR values)
 ]
 
 #%% Utility function to normalize images for display

@@ -6,6 +6,8 @@ Here's my code below. Could you please add inline comments to explain each secti
 
 ## 🔧 Set Your API Key (Required)
 
+pip install openai
+
 ```bash
 export OPENAI_API_KEY=your_api_key_here
 ```
